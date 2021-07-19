@@ -1,9 +1,9 @@
-numpy==1.16.5
-pymilvus==0.3.0
-Keras==2.3.1
-tensorflow==1.14.0
-opencv-python==4.2.0.34
-pillow
+numpy==1.19.5
+pymilvus-orm==2.0.0rc2
+Keras==2.4.3
+tensorflow==2.5.0
+opencv-python==4.5.2.54
+Pillow==8.2.0
 pymysql
 fastapi
 uvicorn

@@ -5,7 +5,7 @@ from service.search import do_search_logo, do_search_face, do_only_her
 from service.count import do_count_table
 from service.delete import do_delete_table
 from service.format import format_info
-from indexer.index import milvus_client
+from indexer.index import MilvusHelper
 from indexer.tools import connect_mysql
 from common.config import UPLOAD_PATH
 import time
@@ -36,7 +36,7 @@ app.add_middleware(
 def init_conn():
     conn = connect_mysql()
     cursor = conn.cursor()
-    index_client = milvus_client()
+    index_client = MilvusHelper()
     return index_client, conn, cursor
 
 
@@ -163,7 +163,7 @@ async def who_in_video(request: Request, video: UploadFile = File(...), table_na
 
 
 @app.post('/getFaceInfo')
-async def get_face_info(table_name: str = None, request: Request, filename: str, time: int):
+async def get_face_info(request: Request, filename: str, time: int, table_name: str = None):
     try:
         vc = cv2.VideoCapture(filename)
         vc.set(cv2.CAP_PROP_POS_MSEC, time)

@@ -4,8 +4,8 @@ Common video analytics systems can automatically identify and track the types of
 
 ## Environmental preparation
 
-- **Milvus 0.11.0**
-- pymilvus==0.3.0
+- **[Milvus 2.0](https://milvus.io/cn/docs/v2.0.0/install_standalone-docker.md)**
+- pymilvus-orm==2.0.0rc2
 - tensorflow==1.14.0
 - opencv-python==4.2.0.34
 
@@ -19,9 +19,9 @@ The following describes the important parameters of webservice.
 
 | Parameter        | Description               | Default      |
 | ---------------- | ------------------------- | ------------ |
-| MILVUS_HOST      | Milvus service IP         | 192.168.1.58 |
-| MILVUS_PORT      | Milvus service port       | 19666        |
-| LOGO_DIMENSION   | Dimension of logo         | 256          |
+| MILVUS_HOST      | Milvus service IP         | 127.0.0.1    |
+| MILVUS_PORT      | Milvus service port       | 19530        |
+| LOGO_DIMENSION   | Dimension of logo         | 2048          |
 | FACE_DIMENSION   | Dimension of face         | 512          |
 | MYSQL_USER       | MySql user name           | root         |
 | MYSQL_PASSWORD   | MySql password            | 123456       |
@@ -32,15 +32,14 @@ The following describes the important parameters of webservice.
 
 ## Steps
 
-1. Install Milvus 0.11.0 as described in [installation overview](https://milvus.io/docs/install_milvus.md).
+1. Install Milvusv2.0 as described in [installation overview](https://milvus.io/docs/v2.0.0/install_standalone-docker.md).
 
 2. Install MySQL.
 
 3. Pull the source code.
 
    ```bash
-   $ git clone https://github.com/milvus-io/bootcamp.git
-   $ cd bootcamp/solution/Video_analysis
+   $ git clone https://github.com/zilliz-bootcamp/video_analysis.git
    ```
 
 4. Installation dependencies.
@@ -70,7 +69,7 @@ The following describes the important parameters of webservice.
    ...
    ```
 
-   > Now, get the API by visiting http://127.0.0.1.58:8000/docs in your browser.
+   > Now, get the API by visiting http://127.0.0.1:8000/docs in your browser.
 
 ## Results display
 

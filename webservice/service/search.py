@@ -1,11 +1,10 @@
 import logging as log
 from common.config import LOGO_TABLE, FACE_TABLE
-from indexer.index import milvus_client, search_vectors, get_vector_by_ids
 from indexer.tools import connect_mysql, search_by_milvus_id
 from frame_extract import extract_frame
 import uuid
 import os
-from common.config import DATA_PATH
+from common.config import DATA_PATH, TOP_K
 from yolov3_detector.paddle_yolo import run, YOLO_v3 as Detector
 import numpy as np
 
@@ -62,7 +61,7 @@ def do_search_logo(image_encoder, index_client, conn, cursor, table_name, filena
     run(detector, DATA_PATH + '/' + prefix)
 
     vectors, obj_images = get_object_vector(image_encoder, DATA_PATH + '/' + prefix + '/object')
-    results = search_vectors(index_client, table_name, vectors, "L2")
+    results = index_client.search_vectors(table_name, vectors, TOP_K)
 
     info, times = get_object_info(conn, cursor, table_name, results, obj_images)
     return info, times
@@ -77,7 +76,7 @@ def do_only_her(face_encoder, index_client, conn, cursor, table_name, filename):
     vectors, face_images = get_face_vector(face_encoder, DATA_PATH + '/' + prefix)
     global_info = []
     for faces in vectors:
-        results = search_vectors(index_client, table_name, faces, "L2")
+        results = index_client.search_vectors(table_name, faces, TOP_K)
         info = get_face_info(conn, cursor, table_name, results)
         global_info.append(info)
     return global_info
@@ -87,6 +86,6 @@ def do_search_face(face_encoder, index_client, conn, cursor, table_name, filenam
     if not table_name:
         table_name = FACE_TABLE
     faces = face_encoder.execute(filename)
-    results = search_vectors(index_client, table_name, faces, "L2")
+    results = index_client.search_vectors(table_name, faces, TOP_K)
     info = get_face_info(conn, cursor, table_name, results)
     return info
