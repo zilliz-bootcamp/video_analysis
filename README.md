@@ -1,3 +1,5 @@
+:exclamation::exclamation: **This repo will no longer be maintained, please visit https://github.com/milvus-io/bootcamp** :exclamation: :exclamation:
+
 # Video analysis based on Milvus
 
 Common video analytics systems can automatically identify and track the types of moving targets that appear in the video area, and can monitor multiple targets in the same scene simultaneously. The analyzed video can be used in a wide range of applications, such as advertising recommendations, security and entertainment industries. This project uses [YOLOv3](https://pjreddie.com/darknet/yolo/) and [insightface](https://github.com/deepinsight/insightface), combined with frame capturing technique of OpenCV, to recognize logos on objects that appear in the video and track and identify faces.
